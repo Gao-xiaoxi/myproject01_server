@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, request
 
+from extensions import db
 from models import Goods
 #定义蓝图
 goods_blue = Blueprint('goods', __name__)
@@ -29,6 +30,11 @@ def get_all_goods():
 @goods_blue.route('/query', methods=["POST"])
 def query_goods():
     """ 根据条件查询商品 """
+    print('----------------------------')
+    print(request)
+    print(request.json)
+    print(request.method)
+    print('----------------------------')
     id_ = request.json.get('id') #从前端获取
     good_name = request.json.get('good_name') #从前端获取
     if id_ and good_name:
@@ -57,3 +63,30 @@ def query_goods():
         return jsonify({"code": "0","results": results, "msg": "操作成功"})
     else:
         return jsonify({"code": "1", "results": [], "msg": "暂无数据"})
+
+@goods_blue.route('/add', methods=["POST"])
+def add_goods():
+    """ 添加商品 """
+    print('---------添加商品-------------------')
+    # print("form:", request.form)
+    # print("data:", request.data)
+    # print("values:", request.values)
+    # print("args:", request.args)
+    print("json:", request.json)
+    good_name = request.json.get('good_name')  # 从前端获取
+    good_price = request.json.get('good_price')  # 从前端获取
+    good_num = request.json.get('good_num')  # 从前端获取
+    if good_name and good_price and good_num:
+        try:
+            good = Goods(good_name=good_name, good_price=good_price, good_num=good_num)
+            db.session.add(good)
+            db.session.commit()
+            return jsonify({"code": "0","msg": "添加成功"})
+        except Exception as e:
+            print(e)
+            return jsonify({"code": "1", "msg": "添加失败"})
+    else:
+        return jsonify({"code": "1", "msg": "添加失败"})
+
+
+# TypeError: The view function for 'goods.add_goods' did not return a valid response. The function either returned None or ended without a return statement.

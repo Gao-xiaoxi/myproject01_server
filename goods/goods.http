@@ -1,3 +1,9 @@
+POST http://127.0.0.1:8001/goods/add
+Content-Type: application/json
+
+{"good_category":"","good_name":"18","good_price":"8","good_num":"8","good_sell":"","good_image":"","good_desc":""}
+
+###
 POST http://127.0.0.1:8001/goods/query
 Content-Type: application/json
 
