@@ -1,0 +1,17 @@
+POST http://127.0.0.1:8001/goods/query
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "商品名称1"
+}
+
+###
+
+###
+GET http://127.0.0.1:8001/goods/
+Accept: application/json
+
+###
+GET http://127.0.0.1:8001/goods/7
+Accept: application/json
