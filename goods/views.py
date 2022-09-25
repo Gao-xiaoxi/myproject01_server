@@ -7,7 +7,7 @@ goods_blue = Blueprint('goods', __name__)
 
 # 视图函数
 @goods_blue.route('/', methods=["GET"])
-def get_all_goods():
+def get_all_goods(page_size=10):
     """ 获取所有的商品 """
     # 全查询：可以理解为没有任何参数，不需要接收前端的数据，业务逻辑可以理解为，直接执行数据库的全查询
     goods = Goods.query.all()  # 返回是列表
@@ -25,7 +25,8 @@ def get_all_goods():
                 'good_desc': good.good_desc,
             }
         )
-    return jsonify({"code": "0", "results": results, "msg": "操作成功"})
+    total = len(results)
+    return jsonify({"code": "0", "results": results, "page_size": page_size, "total": total, "msg": "操作成功"})
 
 @goods_blue.route('/query', methods=["POST"])
 def query_goods():
