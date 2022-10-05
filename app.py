@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 from flask.views import MethodView
 from extensions import db, cors
 from goods.views import goods_blue
+from category.views import category_blue
 from models import Goods
 
 app = Flask(__name__)
@@ -148,6 +149,7 @@ def hello_world():
 
 # 注册蓝图
 app.register_blueprint(goods_blue, url_prefix='/goods')
+app.register_blueprint(category_blue, url_prefix='/category')
 
 if __name__ == '__main__':
     app.run()

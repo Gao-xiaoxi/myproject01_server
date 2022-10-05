@@ -1,0 +1,12 @@
+记录一下遇到的问题
+
+1、数据库迁移
+当orm模型增加或变化时，需要数据库迁移
+http://t.zoukankan.com/fiona-zhong-p-10039943.html
+遇到问题：Cannot find reference ‘MigrateCommand‘ in ‘__init__.py‘
+flask_migrate模块安装版本不匹配，flask_migrate版本过高，没有MigrateCommand
+pip install flask_migrate==2.5.3
+如果MigrateCommand仍然飘红，把MigrateCommand那行代码清除再重新写一遍
+
+2、
+

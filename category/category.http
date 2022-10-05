@@ -1,0 +1,17 @@
+GET http://127.0.0.1:8001/category/
+Accept: application/json
+
+###
+
+GET http://127.0.0.1:8001/category/parent
+Accept: application/json
+
+###
+
+POST http://127.0.0.1:8001/category/child
+Content-Type: application/json
+
+{
+  "name": "文具类"
+}
+
